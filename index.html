@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Koltuk & Halı Yıkama</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .input-group label {
+        flex-basis: 60%;
+        margin-right: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .input-group button {
+        padding: 5px 10px;
+        margin-left: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .input-group button:hover {
+        background-color: #3e8e41;
+      }
+
+      .result {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .result span {
+        color: #4CAF50;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Koltuk & Halı Yıkama</h1>
+      <div class="input-group">
+        <label>Kaç adet tekli koltuk (veya berjer)?</label>
+        <button class="minus" onclick="decrement('tekli')">-</button>
+        <input id="tekli" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('tekli')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet ikili koltuk (kanepe, çekyat)?</label>
+        <button class="minus" onclick="decrement('ikili')">-</button>
+        <input id="ikili" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('ikili')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet üçlü koltuk (kanepe, çekyat)?</label>
+        <button class="minus" onclick="decrement('uclu')">-</button>
+        <input id="uclu" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('uclu')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet L-şeklinde köşe koltuğu?</label>
+        <button class="minus" onclick="decrement('kose')">-</button>
+        <input id="kose" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('kose')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet sandalye?</label>
+        <button class="minus" onclick="decrement('sandalye')">-</button>
+        <input id="sandalye" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('sandalye')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet tek kişilik yatak?</label>
+        <button class="minus" onclick="decrement('tek')">-</button>
+        <input id="tek" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('tek')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet çift kişilik yatak?</label>
+        <button class="minus" onclick="decrement('cift')">-</button>
+        <input id="cift" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('cift')">+</button>
+      </div>
+      <div class="input-group">
+        <label>Kaç adet halı (metrekare cinsinden)? Büyük oda halıları 6m2'dir ve çoğu halı 1 ila 6m2 arasındadır. En yakın seçeneği seçmen yeterli.
+
+</label>
+        <button class="minus" onclick="decrement('hali')">-</button>
+        <input id="hali" type="number" min="0" max="999" value="0">
+        <button class="plus" onclick="increment('hali')">+</button>
+      </div>
+      <button onclick="calculate()" style="display: block; margin: 0 auto;">Hesapla</button>
+      <div id="result" class="hidden">
+        <p>Toplam fiyat: <span id="total"></span></p>
+      </div>
+    </div>
+    <script>
+      function increment(id) {
+        var input = document.getElementById(id);
+        input.value++;
+      }
+
+      function decrement(id) {
+        var input = document.getElementById(id);
+        if (input.value > 0) {
+          input.value--;
+        }
+      }
+
+      function calculate() {
+        var tekli = document.getElementById("tekli").value;
+        var ikili = document.getElementById("ikili").value;
+        var uclu = document.getElementById("uclu").value;
+        var kose = document.getElementById("kose").value;
+        var sandalye = document.getElementById("sandalye").value;
+        var tek = document.getElementById("tek").value;
+        var cift = document.getElementById("cift").value;
+        var hali = document.getElementById("hali").value;
+
+        var total = (tekli * 200) + (ikili * 400) + (uclu * 400) + (kose * 1100) + (sandalye * 100) + (tek * 600) + (cift * 800) + (hali * 70);
+
+        var result = document.getElementById("result");
+        var totalElement = document.getElementById("total");
+        totalElement.innerText = total;
+        result.classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
